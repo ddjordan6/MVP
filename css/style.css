@@ -1,1 +1,202 @@
+:root {
+  --campus-navy: #172554;
+  --campus-blue: #1d4ed8;
+  --campus-light: #eff6ff;
+  --campus-text: #172033;
+  --campus-muted: #64748b;
+}
 
+body {
+  color: var(--campus-text);
+  background: #f8fafc;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+
+.campus-nav {
+  background: var(--campus-navy);
+}
+
+.campus-nav .nav-link {
+  color: #dbeafe;
+}
+
+.campus-nav .nav-link:hover,
+.campus-nav .nav-link.active {
+  color: #fff;
+}
+
+
+.hero-section {
+  color: white;
+  background: linear-gradient(120deg, #172554, #1d4ed8);
+}
+
+.hero-section h1 {
+  max-width: 760px;
+  font-size: clamp(2.4rem, 6vw, 4.4rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.hero-copy {
+  max-width: 680px;
+  color: #dbeafe;
+}
+
+.eyebrow {
+  margin-bottom: 0.6rem;
+  color: #2563eb;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+}
+
+.hero-section .eyebrow {
+  color: #bfdbfe;
+}
+
+.section-heading h2,
+.page-title {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.page-title {
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+}
+
+.page-intro {
+  max-width: 720px;
+  color: var(--campus-muted);
+  font-size: 1.1rem;
+}
+
+
+.feature-card,
+.event-card {
+  padding: 1.5rem;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.04);
+}
+
+.feature-card h3 {
+  margin-top: 1rem;
+  font-size: 1.25rem;
+  font-weight: 750;
+}
+
+.feature-card p,
+.event-card p {
+  color: var(--campus-muted);
+}
+
+.feature-icon {
+  font-size: 2rem;
+}
+
+.text-link {
+  color: var(--campus-blue);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.text-link:hover {
+  text-decoration: underline;
+}
+
+
+.weather-result {
+  font-weight: 750;
+}
+
+.tip-banner {
+  padding: 1.5rem;
+  border: 1px solid #bfdbfe;
+  border-radius: 1rem;
+  background: var(--campus-light);
+}
+
+
+.event-card {
+  height: 100%;
+}
+
+.event-meta {
+  color: var(--campus-muted);
+  font-size: 0.9rem;
+}
+
+.category-pill {
+  display: inline-block;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  background: #dbeafe;
+  color: #1e40af;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: capitalize;
+}
+
+.save-event {
+  margin-top: 0.75rem;
+}
+
+.empty-state {
+  padding: 2rem;
+  border: 1px dashed #94a3b8;
+  border-radius: 1rem;
+  text-align: center;
+  color: var(--campus-muted);
+}
+
+
+.map-frame {
+  overflow: hidden;
+  min-height: 400px;
+  border: 1px solid #cbd5e1;
+  border-radius: 1rem;
+  background: #e2e8f0;
+}
+
+.map-frame iframe {
+  display: block;
+  width: 100%;
+  height: 450px;
+  border: 0;
+}
+
+
+.site-footer {
+  margin-top: 2rem;
+  background: #0f172a;
+  color: #cbd5e1;
+}
+
+.site-footer a {
+  color: #bfdbfe;
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+}
+
+
+@media (max-width: 576px) {
+  .hero-section .container {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  .feature-card,
+  .event-card {
+    padding: 1.2rem;
+  }
+
+  .map-frame iframe {
+    height: 360px;
+  }
+}
