@@ -1,6 +1,5 @@
 
-// Campus Life Super App MVP JavaScript.
-// Handles weather, event filtering, saved events, and map search.
+
 
 document.addEventListener("DOMContentLoaded", () => {
   loadWeather();
@@ -8,12 +7,12 @@ document.addEventListener("DOMContentLoaded", () => {
   setupMapSearch();
 });
 
-// Get current weather from Open-Meteo. This API does not require a key.
+
 async function loadWeather() {
   const status = document.querySelector("#weather-status");
   const result = document.querySelector("#weather-result");
 
-  // The weather section only exists on the home page.
+ 
   if (!status || !result) return;
 
   const url =
@@ -44,7 +43,7 @@ async function loadWeather() {
   }
 }
 
-// Turn the weather API's numeric codes into readable descriptions.
+
 function weatherDescription(code) {
   if (code === 0) return "Clear";
   if ([1, 2, 3].includes(code)) return "Partly cloudy";
@@ -56,7 +55,7 @@ function weatherDescription(code) {
   return "Conditions updated";
 }
 
-// Sample events for the MVP. They are not an official campus schedule.
+
 const campusEvents = [
   {
     id: 1,
@@ -108,13 +107,13 @@ const campusEvents = [
   }
 ];
 
-// Set up event search, category filters, and save buttons.
+
 function setupEventsPage() {
   const list = document.querySelector("#events-list");
   const search = document.querySelector("#event-search");
   const category = document.querySelector("#event-category");
 
-  // Do not run this code on pages without the events controls.
+  
   if (!list || !search || !category) return;
 
   const savedEvents = new Set();
@@ -123,7 +122,7 @@ function setupEventsPage() {
     const query = search.value.trim().toLowerCase();
     const selectedCategory = category.value;
 
-    // Only display events that match both the search and category.
+   
     const filtered = campusEvents.filter(event => {
       const searchableText =
         `${event.title} ${event.description} ` +
@@ -137,7 +136,7 @@ function setupEventsPage() {
       return matchesQuery && matchesCategory;
     });
 
-    // Create a card for each matching event.
+   
     list.innerHTML = filtered.map(event => `
       <div class="col-md-6 col-lg-4">
         <article class="event-card">
@@ -171,7 +170,7 @@ function setupEventsPage() {
     }
   }
 
-  // Event delegation keeps the save buttons working after re-rendering.
+
   list.addEventListener("click", event => {
     const button = event.target.closest("[data-event-id]");
     if (!button) return;
@@ -193,15 +192,13 @@ function setupEventsPage() {
   renderEvents();
 }
 
-// Search for a location and move the map to the result.
 function setupMapSearch() {
   const form = document.querySelector("#place-form");
   const input = document.querySelector("#place-search");
   const map = document.querySelector("#campus-map");
   const status = document.querySelector("#map-status");
 
-  // Only run this function on the map page.
-  if (!form || !input || !map || !status) return;
+]  if (!form || !input || !map || !status) return;
 
   form.addEventListener("submit", async event => {
     event.preventDefault();
@@ -259,7 +256,6 @@ function setupMapSearch() {
   });
 }
 
-// Escape text before inserting it into the event card HTML.
 function escapeHTML(value) {
   return String(value).replace(/[&<>"']/g, character => ({
     "&": "&amp;",
