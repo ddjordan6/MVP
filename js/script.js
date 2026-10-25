@@ -3,31 +3,22 @@ document.addEventListener("DOMContentLoaded", () => {
   setupEventsPage();
   setupMapSearch();
 });
-
-
 async function loadWeather() {
   const status = document.querySelector("#weather-status");
   const result = document.querySelector("#weather-result");
-
- 
   if (!status || !result) return;
-
   const url =
     "https://api.open-meteo.com/v1/forecast" +
     "?latitude=34.3168&longitude=-84.5538" +
     "&current=temperature_2m,apparent_temperature,weather_code" +
     "&temperature_unit=fahrenheit";
-
   try {
     const response = await fetch(url);
-
     if (!response.ok) {
       throw new Error("Weather request failed");
     }
-
     const data = await response.json();
     const current = data.current;
-
     status.textContent = "Current weather near campus";
     result.textContent =
       `${Math.round(current.temperature_2m)}°F · ` +
@@ -39,8 +30,6 @@ async function loadWeather() {
     console.error("Weather API error:", error);
   }
 }
-
-
 function weatherDescription(code) {
   if (code === 0) return "Clear";
   if ([1, 2, 3].includes(code)) return "Partly cloudy";
@@ -51,8 +40,6 @@ function weatherDescription(code) {
   if ([95, 96, 99].includes(code)) return "Thunderstorms";
   return "Conditions updated";
 }
-
-
 const campusEvents = [
   {
     id: 1,
@@ -103,37 +90,25 @@ const campusEvents = [
     description: "Meet new people and learn about student clubs and activities."
   }
 ];
-
-
 function setupEventsPage() {
   const list = document.querySelector("#events-list");
   const search = document.querySelector("#event-search");
-  const category = document.querySelector("#event-category");
-
-  
+  const category = document.querySelector("#event-category")
   if (!list || !search || !category) return;
-
   const savedEvents = new Set();
-
   function renderEvents() {
     const query = search.value.trim().toLowerCase();
     const selectedCategory = category.value;
-
-   
     const filtered = campusEvents.filter(event => {
       const searchableText =
         `${event.title} ${event.description} ` +
         `${event.location} ${event.category}`;
-
       const matchesQuery = searchableText.toLowerCase().includes(query);
       const matchesCategory =
         selectedCategory === "all" ||
         event.category === selectedCategory;
-
       return matchesQuery && matchesCategory;
     });
-
-   
     list.innerHTML = filtered.map(event => `
       <div class="col-md-6 col-lg-4">
         <article class="event-card">
@@ -153,39 +128,29 @@ function setupEventsPage() {
         </article>
       </div>
     `).join("");
-
     const count = document.querySelector("#event-count");
     const empty = document.querySelector("#no-events");
-
     if (count) {
       count.textContent =
         `Showing ${filtered.length} of ${campusEvents.length} sample events`;
     }
-
     if (empty) {
       empty.classList.toggle("d-none", filtered.length !== 0);
     }
   }
-
-
   list.addEventListener("click", event => {
     const button = event.target.closest("[data-event-id]");
     if (!button) return;
-
     const id = Number(button.dataset.eventId);
-
     if (savedEvents.has(id)) {
       savedEvents.delete(id);
     } else {
       savedEvents.add(id);
     }
-
     renderEvents();
   });
-
   search.addEventListener("input", renderEvents);
   category.addEventListener("change", renderEvents);
-
   renderEvents();
 }
 
@@ -194,56 +159,42 @@ function setupMapSearch() {
   const input = document.querySelector("#place-search");
   const map = document.querySelector("#campus-map");
   const status = document.querySelector("#map-status");
-
 ]  if (!form || !input || !map || !status) return;
-
   form.addEventListener("submit", async event => {
-    event.preventDefault();
-
+   event.preventDefault();
     const place = input.value.trim();
-
     if (!place) {
       status.textContent = "Enter a place or address to search.";
       return;
     }
-
     status.textContent = "Searching for the location...";
-
     const url =
       "https://nominatim.openstreetmap.org/search" +
       `?format=jsonv2&limit=1&q=${encodeURIComponent(place)}`;
-
     try {
       const response = await fetch(url, {
         headers: { Accept: "application/json" }
       });
-
       if (!response.ok) {
         throw new Error("Map search failed");
       }
-
       const results = await response.json();
-
       if (!results.length) {
         status.textContent =
           "No matching location was found. Try a more specific search.";
         return;
       }
-
       const location = results[0];
       const lat = Number(location.lat);
       const lon = Number(location.lon);
       const padding = 0.01;
-
       const boundingBox =
         `${lon - padding},${lat - padding},` +
         `${lon + padding},${lat + padding}`;
-
       map.src =
         "https://www.openstreetmap.org/export/embed.html" +
         `?bbox=${encodeURIComponent(boundingBox)}` +
         `&layer=mapnik&marker=${lat}%2C${lon}`;
-
       status.textContent = `Map centered on: ${location.display_name}`;
     } catch (error) {
       status.textContent =
@@ -252,7 +203,6 @@ function setupMapSearch() {
     }
   });
 }
-
 function escapeHTML(value) {
   return String(value).replace(/[&<>"']/g, character => ({
     "&": "&amp;",
