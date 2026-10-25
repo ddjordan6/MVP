@@ -159,7 +159,7 @@ function setupMapSearch() {
   const input = document.querySelector("#place-search");
   const map = document.querySelector("#campus-map");
   const status = document.querySelector("#map-status");
-]  if (!form || !input || !map || !status) return;
+ if (!form || !input || !map || !status) return;
   form.addEventListener("submit", async event => {
    event.preventDefault();
     const place = input.value.trim();
